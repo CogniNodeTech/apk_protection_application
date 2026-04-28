@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.orchestration.RiskAssessmentEngineTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.003">
+  <properties/>
+  <testcase name="emptyLayerResults_returnsZero" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.0"/>
+  <testcase name="singleLayer_returnsThatLayerRisk" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.001"/>
+  <testcase name="riskAbove100_coercedTo100" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.0"/>
+  <testcase name="aggregateEvidence_combinesAndDedupes" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.0"/>
+  <testcase name="aggregateEvidence_emptyLayers_returnsEmpty" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.001"/>
+  <testcase name="multipleLayers_returnsConsensusWeightedRisk" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.0"/>
+  <testcase name="riskBelowZero_coercedTo0" classname="com.safeguard.core.orchestration.RiskAssessmentEngineTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

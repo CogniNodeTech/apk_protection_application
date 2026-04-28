@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.data.repository.CloudVerificationRepositoryImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-04-27T07:05:16" hostname="DESKTOP-KH25HMN" time="0.278">
+  <properties/>
+  <testcase name="verify_http4xx_doesNotRetryClientError" classname="com.safeguard.data.repository.CloudVerificationRepositoryImplTest" time="0.258"/>
+  <testcase name="verify_http429_retriesThenSucceeds" classname="com.safeguard.data.repository.CloudVerificationRepositoryImplTest" time="0.012"/>
+  <testcase name="verify_mapsJsonResponse_toDomain" classname="com.safeguard.data.repository.CloudVerificationRepositoryImplTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

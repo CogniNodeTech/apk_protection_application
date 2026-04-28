@@ -1,0 +1,38 @@
+# Copy relevant lines into local.properties (same folder as this file).
+# Android Studio usually creates local.properties for sdk.dir only — you can append the keys below.
+
+# --- Compliance & release (REQUIRED FOR PRODUCTION) ---
+# Threat-intel API base URL (include trailing /). Same host for POST /auth/register, /auth/login, etc.
+# IMPORTANT: Replace with your actual production API URL for production builds
+# Android emulator → host machine: http://10.0.2.2:3000/ (see server/README.md).
+# Production example: https://api.safeguard.yourdomain.com/
+safeguard.api.base.url=https://api.safeguard.yourdomain.com/
+safeguard.api.key=your-production-api-key-here
+
+# MalwareBazaar is queried only by your FastAPI server (env MALWAREBAZAAR_AUTH_KEY), never embedded in the app.
+
+# Public HTTPS URLs for in-app Privacy policy / Terms links and Play Store listing.
+# IMPORTANT: Replace with your actual production URLs
+safeguard.privacy.policy.url=https://yourdomain.com/privacy
+safeguard.terms.url=https://yourdomain.com/terms
+
+# OkHttp certificate pin for your cloud API host (SHA-256, base64).
+# REQUIRED for production builds to prevent MITM attacks
+# Leave empty to disable pinning (e.g. local dev). See docs/GOOGLE_PLAY_DATA_SAFETY.md.
+# Example format: sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+# Generate with: openssl s_client -connect api.safeguard.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+safeguard.cert.pin=
+
+# Expected SHA-256 fingerprint of the production signing certificate used for DeviceIntegrityProvider (RASP).
+# REQUIRED for production release builds to avoid false positives
+# Format: hex pairs separated by ':' (e.g. "AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD")
+# Leave empty for dev builds; release builds require this
+# Generate with: keytool -list -v -keystore your-production-keystore.jks
+safeguard.app.signature.sha256=
+
+# --- Monitoring (Optional for development, Recommended for production) ---
+# Sentry DSN for error tracking
+safeguard.sentry.dsn=
+
+# New Relic token for application performance monitoring
+safeguard.newrelic.token=

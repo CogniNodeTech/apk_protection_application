@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.benchmark.BenchmarkMetricsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.008">
+  <properties/>
+  <testcase name="renderReport_includesAllPinnedFields" classname="com.safeguard.core.benchmark.BenchmarkMetricsTest" time="0.007"/>
+  <testcase name="emptyCorpus_doesNotDivideByZero" classname="com.safeguard.core.benchmark.BenchmarkMetricsTest" time="0.001"/>
+  <testcase name="mixedPredictions_yieldExpectedConfusionMatrix" classname="com.safeguard.core.benchmark.BenchmarkMetricsTest" time="0.0"/>
+  <testcase name="perfectClassifier_yieldsPrecisionAndRecallOfOne" classname="com.safeguard.core.benchmark.BenchmarkMetricsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

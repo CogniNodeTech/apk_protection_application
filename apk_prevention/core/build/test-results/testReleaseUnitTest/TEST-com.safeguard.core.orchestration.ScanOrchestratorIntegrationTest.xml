@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.orchestration.ScanOrchestratorIntegrationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-04-14T11:51:39" hostname="DESKTOP-KH25HMN" time="0.084">
+  <properties/>
+  <testcase name="scan_orchestrator_layer6Unknown_degradesToSuspicious_warn" classname="com.safeguard.core.orchestration.ScanOrchestratorIntegrationTest" time="0.079"/>
+  <testcase name="scan_orchestrator_layer6Malicious_triggersFinalMalicious_quarantine" classname="com.safeguard.core.orchestration.ScanOrchestratorIntegrationTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

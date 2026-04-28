@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.domain.integrity.PlayIntegrityConfigTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.001">
+  <properties/>
+  <testcase name="emptyProjectNumber_isDisabled" classname="com.safeguard.core.domain.integrity.PlayIntegrityConfigTest" time="0.0"/>
+  <testcase name="numericProjectNumber_isEnabled_andParsesAsLong" classname="com.safeguard.core.domain.integrity.PlayIntegrityConfigTest" time="0.0"/>
+  <testcase name="whitespaceProjectNumber_isDisabled" classname="com.safeguard.core.domain.integrity.PlayIntegrityConfigTest" time="0.001"/>
+  <testcase name="nonNumericProjectNumber_isDisabled" classname="com.safeguard.core.domain.integrity.PlayIntegrityConfigTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

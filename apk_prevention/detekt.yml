@@ -1,0 +1,27 @@
+build:
+  maxIssues: 999
+  excludeCorrectable: true
+  weights:
+    complexity: 2
+    LongParameterList: 1
+    style: 1
+    comments: 1
+
+config:
+  validation: true
+  warnings: false
+  maxLineLength: 160
+
+complexity:
+  LongMethod:
+    threshold: 60
+  LongParameterList:
+    threshold: 6
+  ComplexMethod:
+    threshold: 15
+
+style:
+  MagicNumber:
+    active: false
+  MaxLineLength:
+    maxLineLength: 160

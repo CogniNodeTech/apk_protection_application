@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.util.FuzzyHasherTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.044">
+  <properties/>
+  <testcase name="similarity_rejectsShorterOrLongerHexBuffers" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.011"/>
+  <testcase name="hash_returnsNullForUndersizedInput" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.002"/>
+  <testcase name="hash_isDeterministicAcrossInputForms" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.004"/>
+  <testcase name="similarity_perturbationDiffersFromUnrelated" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.02"/>
+  <testcase name="hash_zeroEntropyInput_doesNotMatchRealContent" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.002"/>
+  <testcase name="similarity_acceptsT1PrefixedEncoding" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.0"/>
+  <testcase name="hash_producesSeventyCharUpperCaseHex" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.002"/>
+  <testcase name="similarity_returnsZeroForMalformedOrLegacyHashes" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.0"/>
+  <testcase name="similarity_smallPerturbation_staysAboveDefaultThreshold" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.001"/>
+  <testcase name="similarity_identicalHash_returnsHundred" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.0"/>
+  <testcase name="similarity_independentRandomInputs_areDiscriminated" classname="com.safeguard.core.util.FuzzyHasherTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

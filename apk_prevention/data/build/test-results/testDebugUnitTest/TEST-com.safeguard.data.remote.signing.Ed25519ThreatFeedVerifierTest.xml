@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:42" hostname="DESKTOP-KH25HMN" time="0.068">
+  <properties/>
+  <testcase name="signingEnforced_rejectsLegacyUnsignedDowngrade" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.036"/>
+  <testcase name="signingEnforced_rejectsMalformedBase64" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.002"/>
+  <testcase name="signingEnforced_rejectsWrongPublicKey" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.013"/>
+  <testcase name="envelopeParseFailure_isClassifiedDistinctly" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.002"/>
+  <testcase name="signingEnforced_rejectsMissingSignatureField" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.003"/>
+  <testcase name="signingDisabled_acceptsLegacyUnsignedBody" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.001"/>
+  <testcase name="signingEnforced_acceptsValidSignedEnvelope" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.003"/>
+  <testcase name="signingDisabled_acceptsSignedEnvelopeWithoutVerifying" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.001"/>
+  <testcase name="signingEnforced_rejectsWrongSignatureLength" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.003"/>
+  <testcase name="signingEnforced_rejectsTamperedPayload" classname="com.safeguard.data.remote.signing.Ed25519ThreatFeedVerifierTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

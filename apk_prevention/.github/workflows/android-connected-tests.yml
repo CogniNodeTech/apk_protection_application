@@ -1,0 +1,37 @@
+# Optional: run instrumented tests on a real/emulated device (Firebase Test Lab or self-hosted runner).
+# Default CI stays fast; use workflow_dispatch when you have a reliable emulator or FTL.
+name: Android connected tests (manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  connected:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: apk_prevention
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" >> local.properties
+
+      # Requires an emulator profile on the runner; many teams use Firebase Test Lab instead.
+      - name: Run connected debug tests
+        run: ./gradlew :app:connectedDebugAndroidTest --no-daemon --stacktrace
+        continue-on-error: true

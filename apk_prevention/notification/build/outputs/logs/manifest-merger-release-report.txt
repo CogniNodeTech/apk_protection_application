@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml:2:13-83
+INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml:2:13-83
+	package
+		INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml
+	xmlns:android
+		ADDED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml:2:23-81
+uses-sdk
+INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml reason: use-sdk injection requested
+INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml
+INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml
+	android:targetSdkVersion
+		INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml
+	android:minSdkVersion
+		INJECTED from D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest18151591297031427802.xml

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.security.layers.layer1.Layer1FileMonitorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-04-27T06:38:40" hostname="DESKTOP-KH25HMN" time="0.136">
+  <properties/>
+  <testcase name="benignFile_returnsSafe" classname="com.safeguard.security.layers.layer1.Layer1FileMonitorTest" time="0.129"/>
+  <testcase name="suspiciousFilenameAndTinyFile_triggersHighRiskVerdict" classname="com.safeguard.security.layers.layer1.Layer1FileMonitorTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

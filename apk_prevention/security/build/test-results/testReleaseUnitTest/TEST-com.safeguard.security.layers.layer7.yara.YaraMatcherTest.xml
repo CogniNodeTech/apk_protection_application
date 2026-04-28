@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-04-27T06:38:41" hostname="DESKTOP-KH25HMN" time="0.012">
+  <properties/>
+  <testcase name="fires_onAnyOfThem_evenWithSingleHit" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.001"/>
+  <testcase name="fires_whenAllStringsPresent_andConditionIsAllOfThem" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="nocase_matchesMixedCase" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.001"/>
+  <testcase name="emptyBufferIsSafe" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.001"/>
+  <testcase name="andOrNot_evaluateOnMatchSet" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.003"/>
+  <testcase name="lengthBoundIsRespected" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="hexPattern_doesNotMatchWhenFixedByteWrong" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.005"/>
+  <testcase name="multipleRules_matchedIndependently" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="caseSensitive_doesNotMatchAcrossCase" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.001"/>
+  <testcase name="doesNotFire_whenOnlyOneOfTwoStringsHits_underAllOfThem" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="hexPattern_matchesWithWildcards" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="nOfThem_demandsAtLeastN" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <testcase name="stringMatchesAcrossMultipleScanCalls" classname="com.safeguard.security.layers.layer7.yara.YaraMatcherTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

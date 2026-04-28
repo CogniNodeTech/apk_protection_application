@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.002">
+  <properties/>
+  <testcase name="rule1_maliciousBelowThreshold_doesNotTriggerRule1" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule2_twoMaliciousLowConfidence_returnsBlock" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule2_twoMaliciousHighConfidence_returnsBlock" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule6_allSafeLowConfidence_returnsDefaultSuspicious" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule6_allSafeHighConfidence_returnsAllow" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule3_threeSuspicious_returnsBlock" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="default_inconclusive_returnsSuspiciousWarn" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule1_highConfidenceMalicious_returnsBlock" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule4_anyMalicious_returnsSuspiciousWarn" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="rule5_anyUnknown_returnsSuspiciousWarn" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.0"/>
+  <testcase name="emptyLayerResults_returnsSuspiciousWarn" classname="com.safeguard.core.orchestration.ZeroTrustDecisionEngineTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

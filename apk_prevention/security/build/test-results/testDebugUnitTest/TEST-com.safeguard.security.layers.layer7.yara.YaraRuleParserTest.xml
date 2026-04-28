@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:46:07" hostname="DESKTOP-KH25HMN" time="0.009">
+  <properties/>
+  <testcase name="rejectsAllWildcardHexPattern" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <testcase name="parsesAndOrNotPrecedence" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.002"/>
+  <testcase name="rejectsRuleWithoutCondition" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <testcase name="parsesAnyAllNOfThemConditions" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.0"/>
+  <testcase name="parsesMetaWithSeverityAndDescription" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.0"/>
+  <testcase name="parsesMultipleRulesWithComments" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.0"/>
+  <testcase name="rejectsHalfByteWildcards" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.0"/>
+  <testcase name="parsesMinimalRule" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <testcase name="rejectsRegexStrings" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <testcase name="parsesNocaseModifier_taggingId" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <testcase name="rejectsDuplicateRuleNamesInSingleSource" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.0"/>
+  <testcase name="parsesHexBlockWithWildcards" classname="com.safeguard.security.layers.layer7.yara.YaraRuleParserTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

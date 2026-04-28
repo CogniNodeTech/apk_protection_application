@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.core.domain.integrity.NoOpPlayIntegrityCheckerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:31" hostname="DESKTOP-KH25HMN" time="0.062">
+  <properties/>
+  <testcase name="isReentrant_andStateless" classname="com.safeguard.core.domain.integrity.NoOpPlayIntegrityCheckerTest" time="0.06"/>
+  <testcase name="returnsCanonicalDisabledVerdict" classname="com.safeguard.core.domain.integrity.NoOpPlayIntegrityCheckerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

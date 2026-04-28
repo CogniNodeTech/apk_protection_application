@@ -1,0 +1,77 @@
+com.safeguard.app-activity-ktx-1.8.1-0 C:\Users\sun\.gradle\caches\transforms-3\052cee935c56d21eb6121dbeb4761660\transformed\activity-ktx-1.8.1\res
+com.safeguard.app-animation-release-1 C:\Users\sun\.gradle\caches\transforms-3\05d6c7cea9022a3c1b89679da29cf366\transformed\animation-release\res
+com.safeguard.app-hilt-navigation-compose-1.1.0-2 C:\Users\sun\.gradle\caches\transforms-3\0a454ee7822c444f88dc2cf0ba52914e\transformed\hilt-navigation-compose-1.1.0\res
+com.safeguard.app-ui-release-3 C:\Users\sun\.gradle\caches\transforms-3\0b826a54193946e98912d915b31b71c0\transformed\ui-release\res
+com.safeguard.app-play-services-auth-21.2.0-4 C:\Users\sun\.gradle\caches\transforms-3\0e85067d3647b754063fdab75d27a280\transformed\play-services-auth-21.2.0\res
+com.safeguard.app-annotation-experimental-1.3.0-5 C:\Users\sun\.gradle\caches\transforms-3\0efbb533893105220eaf2d0f70a3d0e2\transformed\annotation-experimental-1.3.0\res
+com.safeguard.app-lifecycle-viewmodel-ktx-2.6.2-6 C:\Users\sun\.gradle\caches\transforms-3\0fcadfcecbb3fd4b0c7b20cab3568896\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+com.safeguard.app-navigation-runtime-2.7.5-7 C:\Users\sun\.gradle\caches\transforms-3\16ad86b13eb9802c53aa820168d953fa\transformed\navigation-runtime-2.7.5\res
+com.safeguard.app-ui-tooling-data-release-8 C:\Users\sun\.gradle\caches\transforms-3\294179cfafa63be0f3c60dd8b24f27d0\transformed\ui-tooling-data-release\res
+com.safeguard.app-sqlite-framework-2.4.0-9 C:\Users\sun\.gradle\caches\transforms-3\29a477f10ad98337b98832552d82f963\transformed\sqlite-framework-2.4.0\res
+com.safeguard.app-security-crypto-1.1.0-alpha06-10 C:\Users\sun\.gradle\caches\transforms-3\2ed848a6fa5c298a91d8d7b6283c1688\transformed\security-crypto-1.1.0-alpha06\res
+com.safeguard.app-foundation-layout-release-11 C:\Users\sun\.gradle\caches\transforms-3\3aac047d9a2fe6adcbfc6a78ec122e07\transformed\foundation-layout-release\res
+com.safeguard.app-hilt-work-1.1.0-12 C:\Users\sun\.gradle\caches\transforms-3\45315d9ea4f1cc3accfa19a239da5a8f\transformed\hilt-work-1.1.0\res
+com.safeguard.app-work-runtime-ktx-2.9.0-13 C:\Users\sun\.gradle\caches\transforms-3\4715b3a2a507ecf9ddc00af7e1a9bbbb\transformed\work-runtime-ktx-2.9.0\res
+com.safeguard.app-ui-unit-release-14 C:\Users\sun\.gradle\caches\transforms-3\512b39b1c38eb9dc3925ecdf01b7bb58\transformed\ui-unit-release\res
+com.safeguard.app-savedstate-1.2.1-15 C:\Users\sun\.gradle\caches\transforms-3\51b575cb672eb4993381eb4171dd9f52\transformed\savedstate-1.2.1\res
+com.safeguard.app-activity-compose-1.8.1-16 C:\Users\sun\.gradle\caches\transforms-3\54872832cd635e4c3eb484791933bf51\transformed\activity-compose-1.8.1\res
+com.safeguard.app-lifecycle-runtime-ktx-2.6.2-17 C:\Users\sun\.gradle\caches\transforms-3\5681321779375df187812dd47b0aa7dd\transformed\lifecycle-runtime-ktx-2.6.2\res
+com.safeguard.app-lifecycle-livedata-core-2.6.2-18 C:\Users\sun\.gradle\caches\transforms-3\5c0e64ebc8eea7ea531ed5ee642f66aa\transformed\lifecycle-livedata-core-2.6.2\res
+com.safeguard.app-ui-tooling-release-19 C:\Users\sun\.gradle\caches\transforms-3\5d3baae5e95a17e18785425228c97d4e\transformed\ui-tooling-release\res
+com.safeguard.app-savedstate-ktx-1.2.1-20 C:\Users\sun\.gradle\caches\transforms-3\5f21c106976b7f76ba0aadb6825c3b3f\transformed\savedstate-ktx-1.2.1\res
+com.safeguard.app-lifecycle-viewmodel-savedstate-2.6.2-21 C:\Users\sun\.gradle\caches\transforms-3\6050b4149aec9166fe3a43de24d39ef1\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.safeguard.app-lifecycle-runtime-2.6.2-22 C:\Users\sun\.gradle\caches\transforms-3\623b7105e20f2efaf3824d7c1674b1c8\transformed\lifecycle-runtime-2.6.2\res
+com.safeguard.app-activity-1.8.1-23 C:\Users\sun\.gradle\caches\transforms-3\6b2fca001c6097cc7219aacf1a5f19d5\transformed\activity-1.8.1\res
+com.safeguard.app-work-runtime-2.9.0-24 C:\Users\sun\.gradle\caches\transforms-3\6f628ab36d1910ca08696832faf7db62\transformed\work-runtime-2.9.0\res
+com.safeguard.app-sqlite-2.4.0-25 C:\Users\sun\.gradle\caches\transforms-3\74bf0ac715854ddb93c50b73e6e2fdc1\transformed\sqlite-2.4.0\res
+com.safeguard.app-room-runtime-2.6.0-26 C:\Users\sun\.gradle\caches\transforms-3\7d636077ad2c7a767b806273eace3ddd\transformed\room-runtime-2.6.0\res
+com.safeguard.app-ui-util-release-27 C:\Users\sun\.gradle\caches\transforms-3\7f35ebb129d8cdbde423dce251030712\transformed\ui-util-release\res
+com.safeguard.app-profileinstaller-1.3.0-28 C:\Users\sun\.gradle\caches\transforms-3\8226dba856e067cb3e420eba7b635159\transformed\profileinstaller-1.3.0\res
+com.safeguard.app-fragment-1.5.7-29 C:\Users\sun\.gradle\caches\transforms-3\86b8837df997668f6b360f506971730b\transformed\fragment-1.5.7\res
+com.safeguard.app-runtime-saveable-release-30 C:\Users\sun\.gradle\caches\transforms-3\889e6239d27ce44c541bc161f93d0fff\transformed\runtime-saveable-release\res
+com.safeguard.app-lifecycle-process-2.6.2-31 C:\Users\sun\.gradle\caches\transforms-3\89b8dad548317972cb2cf4bc57437bc9\transformed\lifecycle-process-2.6.2\res
+com.safeguard.app-lifecycle-livedata-2.6.2-32 C:\Users\sun\.gradle\caches\transforms-3\8bbf6aa2fc64ccf240fc2ef2ba05cf9f\transformed\lifecycle-livedata-2.6.2\res
+com.safeguard.app-animation-core-release-33 C:\Users\sun\.gradle\caches\transforms-3\8bd103509a724908b80fa033f5964643\transformed\animation-core-release\res
+com.safeguard.app-ui-graphics-release-34 C:\Users\sun\.gradle\caches\transforms-3\8e30799efec11aa708bd883fb506a81b\transformed\ui-graphics-release\res
+com.safeguard.app-room-ktx-2.6.0-35 C:\Users\sun\.gradle\caches\transforms-3\9a90901c2dc03843e74b0b86364b2125\transformed\room-ktx-2.6.0\res
+com.safeguard.app-startup-runtime-1.1.1-36 C:\Users\sun\.gradle\caches\transforms-3\9c3e6557ae16e85da50a2bf06de3a3d3\transformed\startup-runtime-1.1.1\res
+com.safeguard.app-lifecycle-viewmodel-compose-2.6.2-37 C:\Users\sun\.gradle\caches\transforms-3\ab142d554d402489b7985a5f8af5e5e2\transformed\lifecycle-viewmodel-compose-2.6.2\res
+com.safeguard.app-play-services-base-18.3.0-38 C:\Users\sun\.gradle\caches\transforms-3\ae55eb2e97a02035a195c8bd4aab61c5\transformed\play-services-base-18.3.0\res
+com.safeguard.app-hilt-navigation-1.1.0-39 C:\Users\sun\.gradle\caches\transforms-3\aee9d6e676d7422ee6e53bae5d31dcdb\transformed\hilt-navigation-1.1.0\res
+com.safeguard.app-core-runtime-2.2.0-40 C:\Users\sun\.gradle\caches\transforms-3\b319d21f6d6d3b5bcedb57434887eb5f\transformed\core-runtime-2.2.0\res
+com.safeguard.app-ui-geometry-release-41 C:\Users\sun\.gradle\caches\transforms-3\b4afdb3315c08631764c57f963658df0\transformed\ui-geometry-release\res
+com.safeguard.app-play-services-basement-18.3.0-42 C:\Users\sun\.gradle\caches\transforms-3\b705e329741ce4fd6a93af8a444931c6\transformed\play-services-basement-18.3.0\res
+com.safeguard.app-material-icons-core-release-43 C:\Users\sun\.gradle\caches\transforms-3\b96ffc170f6f10836721461bd02d8122\transformed\material-icons-core-release\res
+com.safeguard.app-runtime-release-44 C:\Users\sun\.gradle\caches\transforms-3\bb783132792af46121a755b2156ee735\transformed\runtime-release\res
+com.safeguard.app-android-database-sqlcipher-4.5.4-45 C:\Users\sun\.gradle\caches\transforms-3\bcfe907f41a8948ce3a52c287cc60ea9\transformed\android-database-sqlcipher-4.5.4\res
+com.safeguard.app-material-icons-extended-release-46 C:\Users\sun\.gradle\caches\transforms-3\c0d42de5afeef778d1e0f738d36d46cd\transformed\material-icons-extended-release\res
+com.safeguard.app-emoji2-1.4.0-47 C:\Users\sun\.gradle\caches\transforms-3\ccd01a242fbdc03db24b475fca35cac3\transformed\emoji2-1.4.0\res
+com.safeguard.app-navigation-compose-2.7.5-48 C:\Users\sun\.gradle\caches\transforms-3\d0bfbb3fd6442245420b64af953621cc\transformed\navigation-compose-2.7.5\res
+com.safeguard.app-navigation-common-ktx-2.7.5-49 C:\Users\sun\.gradle\caches\transforms-3\d734fdd6f5cd58ea45170a24bdeccaec\transformed\navigation-common-ktx-2.7.5\res
+com.safeguard.app-material3-1.1.2-50 C:\Users\sun\.gradle\caches\transforms-3\d7a09322973daa64cb9ecd4215425065\transformed\material3-1.1.2\res
+com.safeguard.app-foundation-release-51 C:\Users\sun\.gradle\caches\transforms-3\db8091783ffa95fdd9d15deb931569fa\transformed\foundation-release\res
+com.safeguard.app-ui-test-manifest-1.5.4-52 C:\Users\sun\.gradle\caches\transforms-3\dd0d4e2821a5118fa097a20d00352926\transformed\ui-test-manifest-1.5.4\res
+com.safeguard.app-material-release-53 C:\Users\sun\.gradle\caches\transforms-3\e55e0b29347f23b433e115464a40519d\transformed\material-release\res
+com.safeguard.app-navigation-runtime-ktx-2.7.5-54 C:\Users\sun\.gradle\caches\transforms-3\e5c2354414e791e1ac4fd94f5ba1360d\transformed\navigation-runtime-ktx-2.7.5\res
+com.safeguard.app-core-1.12.0-55 C:\Users\sun\.gradle\caches\transforms-3\eab30fcc186388934cda49bf50034115\transformed\core-1.12.0\res
+com.safeguard.app-core-ktx-1.12.0-56 C:\Users\sun\.gradle\caches\transforms-3\ed46c24c95f5fc451a171ff5ba62fe92\transformed\core-ktx-1.12.0\res
+com.safeguard.app-lifecycle-runtime-compose-2.6.2-57 C:\Users\sun\.gradle\caches\transforms-3\ee0aeccb1f4a3b5a4dcc06b867c187eb\transformed\lifecycle-runtime-compose-2.6.2\res
+com.safeguard.app-ui-text-release-58 C:\Users\sun\.gradle\caches\transforms-3\efe6356ddc07c76a7b9349f04d76fac7\transformed\ui-text-release\res
+com.safeguard.app-navigation-common-2.7.5-59 C:\Users\sun\.gradle\caches\transforms-3\f2c718bb210b07c022f5836cc26b93fe\transformed\navigation-common-2.7.5\res
+com.safeguard.app-ui-tooling-preview-release-60 C:\Users\sun\.gradle\caches\transforms-3\f38eab78be76503209fdb3e8269091c2\transformed\ui-tooling-preview-release\res
+com.safeguard.app-material-ripple-release-61 C:\Users\sun\.gradle\caches\transforms-3\f6e9a9df90cc533c32879d41443739a3\transformed\material-ripple-release\res
+com.safeguard.app-lifecycle-service-2.6.2-62 C:\Users\sun\.gradle\caches\transforms-3\fa8543279534d164bcdbe9c03c9da024\transformed\lifecycle-service-2.6.2\res
+com.safeguard.app-lifecycle-viewmodel-2.6.2-63 C:\Users\sun\.gradle\caches\transforms-3\fd3c3705c1120fdd163e59b22556d05e\transformed\lifecycle-viewmodel-2.6.2\res
+com.safeguard.app-customview-poolingcontainer-1.0.0-64 C:\Users\sun\.gradle\caches\transforms-3\fe6eab59b9c6323eb685a67349f2b72e\transformed\customview-poolingcontainer-1.0.0\res
+com.safeguard.app-pngs-65 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\build\generated\res\pngs\debug
+com.safeguard.app-resValues-66 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\build\generated\res\resValues\debug
+com.safeguard.app-packageDebugResources-67 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.safeguard.app-packageDebugResources-68 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.safeguard.app-merged_res-69 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\build\intermediates\merged_res\debug
+com.safeguard.app-debug-70 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\src\debug\res
+com.safeguard.app-main-71 D:\Cogninode Company Projects\apk_prevention\apk_prevention\app\src\main\res
+com.safeguard.app-packaged_res-72 D:\Cogninode Company Projects\apk_prevention\apk_prevention\core\build\intermediates\packaged_res\debug
+com.safeguard.app-packaged_res-73 D:\Cogninode Company Projects\apk_prevention\apk_prevention\data\build\intermediates\packaged_res\debug
+com.safeguard.app-packaged_res-74 D:\Cogninode Company Projects\apk_prevention\apk_prevention\mlmodel\build\intermediates\packaged_res\debug
+com.safeguard.app-packaged_res-75 D:\Cogninode Company Projects\apk_prevention\apk_prevention\notification\build\intermediates\packaged_res\debug
+com.safeguard.app-packaged_res-76 D:\Cogninode Company Projects\apk_prevention\apk_prevention\security\build\intermediates\packaged_res\debug

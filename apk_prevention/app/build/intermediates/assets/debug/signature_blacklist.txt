@@ -1,0 +1,4 @@
+# One SHA-256 certificate fingerprint per line (hex lowercase, no spaces).
+# Add known malicious signer fingerprints to block those APKs.
+# Example (replace with real malicious signer hashes):
+# abc123def456...

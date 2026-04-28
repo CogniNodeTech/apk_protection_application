@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:43" hostname="DESKTOP-KH25HMN" time="0.151">
+  <properties/>
+  <testcase name="signedEnvelopeIsUnwrappedAndPersisted" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.043"/>
+  <testcase name="malformedJsonIsReportedAsFailedWithoutCursorAdvance" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="failedSync_preservesPriorSuccessTimestampAndRecordsReason" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="severityIsClampedAndOptionalFieldsAreNormalised" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.006"/>
+  <testcase name="pagination_stopsAtMaxBatchesEvenIfServerStillReportsHasMore" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.011"/>
+  <testcase name="firstSync_omitsSinceParam_andPersistsCursor" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.008"/>
+  <testcase name="emptyResponseStillAdvancesCursor" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="subsequentSync_passesPersistedCursorAsSince" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.006"/>
+  <testcase name="networkFailureMidPagination_doesNotAdvanceCursor" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.009"/>
+  <testcase name="networkFailure_preservesNeverSyncedSentinelWhenNoPriorSuccess" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.006"/>
+  <testcase name="batchLimitIsClampedToProtocolCeiling" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.007"/>
+  <testcase name="successfulSync_writesSuccessStatusWithFreshTimestamp" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.006"/>
+  <testcase name="rejectedSignatureFailsTheSyncWithoutAdvancingCursor" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="rejectedDowngradeAttemptIsDistinctFromGenericFailure" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="malformedRowsAreFilteredButValidOnesArePersisted" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.005"/>
+  <testcase name="pagination_followsHasMoreUntilExhausted" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.01"/>
+  <testcase name="observeStatus_emitsInitialThenUpdatedSnapshots" classname="com.safeguard.data.repository.ThreatFeedRepositoryImplTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

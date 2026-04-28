@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.security.layers.layer2.HashValidatorTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-04-27T06:38:40" hostname="DESKTOP-KH25HMN" time="0.978">
+  <properties/>
+  <testcase name="tooSmallFile_skipsFuzzyLookup" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.897"/>
+  <testcase name="apkContext_isPopulated_withBothHashesAfterScan" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.027"/>
+  <testcase name="unknownHash_returnsUnknown" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.009"/>
+  <testcase name="knownMalwareHash_withMatchingSha512_emitsConfirmedEvidence" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.021"/>
+  <testcase name="knownMalwareHash_withMismatchingSha512_returnsCollisionSuspicious" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.008"/>
+  <testcase name="knownMalwareHash_returnsMalicious" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.008"/>
+  <testcase name="similarFuzzyHash_returnsSuspicious" classname="com.safeguard.security.layers.layer2.HashValidatorTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

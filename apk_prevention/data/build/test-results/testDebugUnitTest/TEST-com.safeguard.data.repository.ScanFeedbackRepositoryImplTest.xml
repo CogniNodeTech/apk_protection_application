@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-04-27T08:00:42" hostname="DESKTOP-KH25HMN" time="0.098">
+  <properties/>
+  <testcase name="drainOnceClientValidationFailureSurfacesAsFailed" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.034"/>
+  <testcase name="drainOnceShipsTheValidatedDtoOnlyAndDeletesOnSuccess" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.01"/>
+  <testcase name="clearAllWipesQueueRegardlessOfPrefs" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.004"/>
+  <testcase name="drainOnceServerError5xxReturnsFailedWithoutDeletingRows" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.008"/>
+  <testcase name="enqueueIsDroppedWhenTelemetryMasterIsOff" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.004"/>
+  <testcase name="drainOncePartialSuccessDeletesAcceptedRowsOnly" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.007"/>
+  <testcase name="drainOnceWithEmptyQueueReturnsSkipped" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.003"/>
+  <testcase name="queuedCountReportsDaoSize" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.002"/>
+  <testcase name="enqueueWithAllPrefsAlignedPersistsExactlyOneRow" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.001"/>
+  <testcase name="drainOnceIsSkippedWhenFeedbackOptInIsOff" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.002"/>
+  <testcase name="enqueueIsDroppedWhenPrivacySharingOptOutIsOn" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.002"/>
+  <testcase name="enqueueIsDroppedSilentlyWhenFeedbackOptInIsOff" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.001"/>
+  <testcase name="drainOnceFallsBackToAllRowsWhenServerOmitsAcceptedIds" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.008"/>
+  <testcase name="drainOnceNetworkExceptionReturnsFailed" classname="com.safeguard.data.repository.ScanFeedbackRepositoryImplTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

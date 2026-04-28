@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.safeguard.security.layers.layer4.SignatureValidatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-27T06:38:41" hostname="DESKTOP-KH25HMN" time="0.008">
+  <properties/>
+  <testcase name="unsignedApk_noMetaInfCert_returnsMalicious" classname="com.safeguard.security.layers.layer4.SignatureValidatorTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
