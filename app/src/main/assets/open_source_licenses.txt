@@ -1,0 +1,53 @@
+SafeGuard — third-party software
+
+This application includes open-source components. Below are notices for major dependencies. For the full list, see docs/OPEN_SOURCE_NOTICES.md in the project repository.
+
+---
+
+Android Jetpack libraries (Compose, Room, WorkManager, Security Crypto, etc.)
+Licensed under the Apache License, Version 2.0.
+http://www.apache.org/licenses/LICENSE-2.0
+
+---
+
+Kotlin Programming Language
+Licensed under the Apache License, Version 2.0.
+https://kotlinlang.org/docs/license.html
+
+---
+
+Dagger / Hilt (Google)
+Licensed under the Apache License, Version 2.0.
+https://github.com/google/dagger/blob/master/LICENSE.txt
+
+---
+
+OkHttp, Retrofit (Square)
+Licensed under the Apache License, Version 2.0.
+https://square.github.io/okhttp/#license
+
+---
+
+Moshi (Square)
+Licensed under the Apache License, Version 2.0.
+https://github.com/square/moshi
+
+---
+
+SQLCipher for Android (Zetetic)
+See vendor license: https://www.zetetic.net/sqlcipher/license/
+
+---
+
+apk-parser
+Licensed under the Apache License, Version 2.0.
+
+---
+
+Dexlib2 (Google / Smali project)
+Licensed under the BSD 2-Clause License.
+
+---
+
+TensorFlow Lite (if bundled)
+Licensed under the Apache License, Version 2.0.

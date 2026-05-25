@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apk_prevention
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Create local.properties with SDK path
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" >> local.properties
+        env:
+          ANDROID_HOME: ${{ secrets.ANDROID_HOME || '/usr/local/lib/android/sdk' }}
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          skip-sdk-cache: false
+
+      - name: Run unit tests
+        run: ./gradlew :core:testDebugUnitTest :security:testDebugUnitTest :data:testDebugUnitTest --no-daemon --stacktrace
+
+      - name: Run Detekt
+        run: ./gradlew detekt --no-daemon --stacktrace
+
+      - name: Run Android lint
+        run: ./gradlew :app:lintDebug --no-daemon --stacktrace
+
+      - name: Dependency vulnerability scan (Trivy)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: apk_prevention
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          format: table
+
+      - name: Build debug APK
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+
+  server-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apk_prevention/server
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: apk_prevention/server/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pytest (MalwareBazaar + FastAPI)
+        run: python -m pytest -v --tb=short

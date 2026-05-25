@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">APK Prevention</string>
+
+    <!-- Registration Screen -->
+    <string name="reg_title">APK Prevention</string>
+    <string name="reg_subtitle">Create your secure account</string>
+    <string name="reg_or_divider">or register with email</string>
+    <string name="reg_full_name">Full Name</string>
+    <string name="reg_email">Email Address</string>
+    <string name="reg_phone">Phone Number</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_confirm_password">Confirm Password</string>
+    <string name="reg_terms_prefix">I agree to the </string>
+    <string name="reg_terms_of_service">Terms of Service</string>
+    <string name="reg_and"> and </string>
+    <string name="reg_privacy_policy">Privacy Policy</string>
+    <string name="reg_submit">Create Secure Account</string>
+    <string name="reg_already_have_account">Already have an account? </string>
+    <string name="reg_sign_in">Sign In</string>
+
+    <!-- Validation -->
+    <string name="err_name_required">Full name is required</string>
+    <string name="err_name_min_length">Name must be at least 2 characters</string>
+    <string name="err_email_required">Email is required</string>
+    <string name="err_email_invalid">Please enter a valid email</string>
+    <string name="err_phone_required">Phone number is required</string>
+    <string name="err_phone_invalid">Please enter a valid phone number</string>
+    <string name="err_password_required">Password is required</string>
+    <string name="err_password_min_length">Password must be at least 8 characters</string>
+    <string name="err_confirm_required">Please confirm your password</string>
+    <string name="err_passwords_mismatch">Passwords do not match</string>
+    <string name="err_terms_required">You must agree to the Terms</string>
+    <string name="err_email_enter_for_reset">Enter your email first</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Sign in to continue your protection</string>
+    <string name="login_or_divider">or sign in with email</string>
+    <string name="login_submit">Sign In</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_no_account">Don\'t have an account? </string>
+    <string name="login_register">Register</string>
+
+    <!-- OTP Screen -->
+    <string name="otp_title">Phone Verification</string>
+    <string name="otp_subtitle">Enter the 6-digit code sent to</string>
+
+    <!-- Social Login -->
+    <string name="social_google">Google</string>
+
+    <!-- Accessibility -->
+    <string name="a11y_show_password">Show password</string>
+    <string name="a11y_hide_password">Hide password</string>
+
+    <!-- Password Strength -->
+    <string name="strength_very_weak">Very Weak</string>
+    <string name="strength_weak">Weak</string>
+    <string name="strength_fair">Fair</string>
+    <string name="strength_strong">Strong</string>
+    <string name="strength_very_strong">Very Strong</string>
+</resources>

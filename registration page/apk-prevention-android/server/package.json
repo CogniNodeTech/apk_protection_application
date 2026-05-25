@@ -1,0 +1,34 @@
+{
+  "name": "apk-prevention-auth-server",
+  "version": "1.0.0",
+  "description": "Express.js auth API for APK Prevention app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "migrate": "node db/runMigrations.js",
+    "check:prod": "node scripts/check-production-env.js",
+    "init:db": "node scripts/ensure-database.js",
+    "test:db": "node scripts/test-db.js",
+    "test:api": "node scripts/integration-test.js",
+    "test:all": "npm run test:db && npm run test:api"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.3.2",
+    "express-validator": "^7.3.2",
+    "google-auth-library": "^9.15.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "morgan": "^1.10.1",
+    "nodemailer": "^6.9.16",
+    "pg": "^8.20.0",
+    "twilio": "^5.4.0",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,2 @@
+# Place malware_detector_v3_quantized.tflite here for ML Layer 5.
+# If missing, the app uses a heuristic fallback.
