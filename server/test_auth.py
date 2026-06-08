@@ -1,21 +1,23 @@
-"""Tests for /auth routes (in-memory store reset per test)."""
-from __future__ import annotations
+import os
+# Force SQLite in-memory database during tests to keep them isolated and serverless
+os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
 import pytest
 from fastapi.testclient import TestClient
 
+from database import Base, engine, init_db
 import auth_routes
 from main import app
 
 
 @pytest.fixture(autouse=True)
 def _reset_auth_store() -> None:
-    # Keep tests isolated in-memory only; never mutate the persistent on-disk user DB.
-    auth_routes._users.clear()
-    auth_routes._otp.clear()
+    # Keep tests isolated by dropping and recreating all tables
+    Base.metadata.drop_all(bind=engine)
+    init_db()
     yield
-    auth_routes._users.clear()
-    auth_routes._otp.clear()
+    Base.metadata.drop_all(bind=engine)
+    init_db()
 
 
 @pytest.fixture

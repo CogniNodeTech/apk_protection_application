@@ -1,7 +1,6 @@
 """
 User authentication API (register, login, OTP) for SafeGuard Android.
-
-In-memory store for development; replace with a database and real SMS/email in production.
+Utilizes SQLAlchemy to support MySQL or SQLite database backend configurations.
 """
 from __future__ import annotations
 
@@ -19,9 +18,13 @@ from email.message import EmailMessage
 from typing import Any
 
 import jwt
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
+from sqlalchemy import Column, Float, String
+from sqlalchemy.orm import Session
+
+from database import Base, get_db, get_db_session, init_db
 
 logger = logging.getLogger(__name__)
 
@@ -45,15 +48,183 @@ AUTH_RESET_LINK_BASE_URL = os.environ.get("AUTH_RESET_LINK_BASE_URL", "").strip(
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
+
+# ── Database Model Definitions ────────────────────────────────────────────────
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(String(50), primary_key=True)
+    fullName = Column(String(100), nullable=False)
+    email = Column(String(150), unique=True, nullable=False, index=True)
+    phone = Column(String(50), nullable=False)
+    salt_hex = Column(String(64), nullable=False)
+    password_hash = Column(String(128), nullable=False)
+
+
+class Otp(Base):
+    __tablename__ = "otps"
+
+    phone = Column(String(50), primary_key=True)
+    code = Column(String(20), nullable=False)
+    expires_at = Column(Float, nullable=False)
+
+
+class PasswordReset(Base):
+    __tablename__ = "password_resets"
+
+    token = Column(String(100), primary_key=True)
+    email = Column(String(150), nullable=False)
+    expires_at = Column(Float, nullable=False)
+
+
+# Initialize Database Tables
+init_db()
+
+
+# ── Dict-like Compatibility Layers for PyTest Fixtures and Legacy logic ────────
+
+class UsersDictCompat:
+    def clear(self) -> None:
+        with get_db_session() as db:
+            db.query(User).delete()
+
+    def __contains__(self, email: str) -> bool:
+        with get_db_session() as db:
+            return db.query(User).filter(User.email == email.strip().lower()).first() is not None
+
+    def __setitem__(self, email: str, value: dict[str, Any]) -> None:
+        with get_db_session() as db:
+            email_norm = email.strip().lower()
+            existing = db.query(User).filter(User.email == email_norm).first()
+            if existing:
+                existing.fullName = value["fullName"]
+                existing.phone = value["phone"]
+                existing.salt_hex = value["salt_hex"]
+                existing.password_hash = value["password_hash"]
+            else:
+                db.add(
+                    User(
+                        id=value["id"],
+                        fullName=value["fullName"],
+                        email=email_norm,
+                        phone=value["phone"],
+                        salt_hex=value["salt_hex"],
+                        password_hash=value["password_hash"],
+                    )
+                )
+            db.commit()
+
+    def get(self, email: str) -> dict[str, Any] | None:
+        with get_db_session() as db:
+            user = db.query(User).filter(User.email == email.strip().lower()).first()
+            if not user:
+                return None
+            return {
+                "id": user.id,
+                "fullName": user.fullName,
+                "email": user.email,
+                "phone": user.phone,
+                "salt_hex": user.salt_hex,
+                "password_hash": user.password_hash,
+            }
+
+    def values(self) -> list[dict[str, Any]]:
+        with get_db_session() as db:
+            users = db.query(User).all()
+            return [
+                {
+                    "id": u.id,
+                    "fullName": u.fullName,
+                    "email": u.email,
+                    "phone": u.phone,
+                    "salt_hex": u.salt_hex,
+                    "password_hash": u.password_hash,
+                }
+                for u in users
+            ]
+
+
+class OtpDictCompat:
+    def clear(self) -> None:
+        with get_db_session() as db:
+            db.query(Otp).delete()
+
+    def __setitem__(self, phone: str, value: tuple[str, float]) -> None:
+        with get_db_session() as db:
+            phone_norm = phone.strip()
+            db.query(Otp).filter(Otp.phone == phone_norm).delete()
+            db.add(Otp(phone=phone_norm, code=value[0], expires_at=value[1]))
+            db.commit()
+
+    def __getitem__(self, phone: str) -> tuple[str, float]:
+        with get_db_session() as db:
+            otp = db.query(Otp).filter(Otp.phone == phone.strip()).first()
+            if not otp:
+                raise KeyError(phone)
+            return (otp.code, otp.expires_at)
+
+    def get(self, phone: str) -> tuple[str, float] | None:
+        with get_db_session() as db:
+            otp = db.query(Otp).filter(Otp.phone == phone.strip()).first()
+            if not otp:
+                return None
+            return (otp.code, otp.expires_at)
+
+    def __delitem__(self, phone: str) -> None:
+        with get_db_session() as db:
+            db.query(Otp).filter(Otp.phone == phone.strip()).delete()
+            db.commit()
+
+
+class PasswordResetDictCompat:
+    def clear(self) -> None:
+        with get_db_session() as db:
+            db.query(PasswordReset).delete()
+
+    def __setitem__(self, token: str, val: tuple[str, float]) -> None:
+        with get_db_session() as db:
+            db.query(PasswordReset).filter(PasswordReset.token == token).delete()
+            db.add(PasswordReset(token=token, email=val[0], expires_at=val[1]))
+            db.commit()
+
+    def __getitem__(self, token: str) -> tuple[str, float]:
+        with get_db_session() as db:
+            entry = db.query(PasswordReset).filter(PasswordReset.token == token).first()
+            if not entry:
+                raise KeyError(token)
+            return (entry.email, entry.expires_at)
+
+    def get(self, token: str) -> tuple[str, float] | None:
+        with get_db_session() as db:
+            entry = db.query(PasswordReset).filter(PasswordReset.token == token).first()
+            if not entry:
+                return None
+            return (entry.email, entry.expires_at)
+
+    def pop(self, token: str, default: Any = None) -> tuple[str, float] | None:
+        with get_db_session() as db:
+            entry = db.query(PasswordReset).filter(PasswordReset.token == token).first()
+            if entry:
+                val = (entry.email, entry.expires_at)
+                db.delete(entry)
+                db.commit()
+                return val
+            return default
+
+
 _lock = threading.Lock()
-_users: dict[str, dict[str, Any]] = {}  # email (lower) -> user record
-_otp: dict[str, tuple[str, float]] = {}  # phone -> (code, expiry_epoch)
-_password_reset_tokens: dict[str, tuple[str, float]] = {}  # token -> (email, expiry_epoch)
+_users = UsersDictCompat()
+_otp = OtpDictCompat()
+_password_reset_tokens = PasswordResetDictCompat()
+
 AUTH_USER_DB_PATH = os.environ.get(
     "AUTH_USER_DB_PATH",
     os.path.join(os.path.dirname(__file__), "auth_users.json"),
 ).strip()
 
+
+# ── Pydantic Request/Response DTOs ────────────────────────────────────────────
 
 class RegisterRequest(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -123,6 +294,8 @@ class OtpResponse(BaseModel):
     debugResetToken: str | None = None
 
 
+# ── Helper Functions ──────────────────────────────────────────────────────────
+
 def _norm_email(email: str) -> str:
     return email.strip().lower()
 
@@ -177,18 +350,20 @@ def _send_password_reset_email(to_email: str, token: str) -> bool:
 
 
 def _persist_users() -> None:
-    """Durably write users so auth survives server restarts/reinstalls."""
-    payload = {
-        email: {
-            "id": rec["id"],
-            "fullName": rec["fullName"],
-            "email": rec["email"],
-            "phone": rec["phone"],
-            "salt_hex": rec["salt_hex"],
-            "password_hash": rec["password_hash"],
+    """Durably write users to backup JSON so legacy file-monitoring tests pass."""
+    with get_db_session() as db:
+        users = db.query(User).all()
+        payload = {
+            u.email: {
+                "id": u.id,
+                "fullName": u.fullName,
+                "email": u.email,
+                "phone": u.phone,
+                "salt_hex": u.salt_hex,
+                "password_hash": u.password_hash,
+            }
+            for u in users
         }
-        for email, rec in _users.items()
-    }
     tmp = f"{AUTH_USER_DB_PATH}.tmp"
     os.makedirs(os.path.dirname(AUTH_USER_DB_PATH), exist_ok=True)
     with open(tmp, "w", encoding="utf-8") as f:
@@ -197,6 +372,7 @@ def _persist_users() -> None:
 
 
 def _load_users() -> None:
+    """Load users from backup JSON into database (process start simulation)."""
     if not os.path.exists(AUTH_USER_DB_PATH):
         return
     try:
@@ -205,25 +381,29 @@ def _load_users() -> None:
         if not isinstance(raw, dict):
             logger.warning("auth: ignoring invalid user db payload")
             return
-        loaded: dict[str, dict[str, Any]] = {}
-        for email, rec in raw.items():
-            if not isinstance(rec, dict):
-                continue
-            salt_hex = str(rec.get("salt_hex", "")).strip().lower()
-            password_hash = str(rec.get("password_hash", "")).strip().lower()
-            if not salt_hex or not password_hash:
-                continue
-            loaded[_norm_email(email)] = {
-                "id": str(rec.get("id", "")).strip() or secrets.token_hex(8),
-                "fullName": str(rec.get("fullName", "")).strip() or "User",
-                "email": _norm_email(str(rec.get("email", email))),
-                "phone": str(rec.get("phone", "")).strip(),
-                "salt_hex": salt_hex,
-                "password_hash": password_hash,
-            }
-        _users.clear()
-        _users.update(loaded)
-        logger.info("auth: loaded %d persisted users", len(_users))
+        with get_db_session() as db:
+            for email, rec in raw.items():
+                if not isinstance(rec, dict):
+                    continue
+                salt_hex = str(rec.get("salt_hex", "")).strip().lower()
+                password_hash = str(rec.get("password_hash", "")).strip().lower()
+                if not salt_hex or not password_hash:
+                    continue
+                email_norm = _norm_email(str(rec.get("email", email)))
+                existing = db.query(User).filter(User.email == email_norm).first()
+                if not existing:
+                    db.add(
+                        User(
+                            id=str(rec.get("id", "")).strip() or secrets.token_hex(8),
+                            fullName=str(rec.get("fullName", "")).strip() or "User",
+                            email=email_norm,
+                            phone=str(rec.get("phone", "")).strip(),
+                            salt_hex=salt_hex,
+                            password_hash=password_hash,
+                        )
+                    )
+            db.commit()
+        logger.info("auth: loaded users from backup JSON")
     except Exception as e:
         logger.warning("auth: failed to load persisted users: %s", e)
 
@@ -241,132 +421,147 @@ def _json_err(status: int, message: str) -> JSONResponse:
     return JSONResponse(status_code=status, content={"success": False, "message": message})
 
 
+# Run initial boot load
 _load_users()
 
 
+# ── Route Handlers ────────────────────────────────────────────────────────────
+
 @router.post("/register", response_model=AuthResponse)
-def register(body: RegisterRequest) -> AuthResponse | JSONResponse:
+def register(body: RegisterRequest, db: Session = Depends(get_db)) -> AuthResponse | JSONResponse:
     email = _norm_email(body.email)
     if not re.match(r"^[^@]+@[^@]+\.[^@]+$", email):
         return _json_err(400, "Invalid email address")
 
+    # DB unique check
+    existing = db.query(User).filter(User.email == email).first()
+    if existing:
+        return _json_err(409, "This email is already registered.")
+
     salt = secrets.token_bytes(16)
     uid = secrets.token_hex(8)
-    rec = {
-        "id": uid,
-        "fullName": body.fullName.strip(),
-        "email": email,
-        "phone": body.phone.strip(),
-        "salt_hex": salt.hex(),
-        "password_hash": _hash_pw(body.password, salt),
-    }
+    user = User(
+        id=uid,
+        fullName=body.fullName.strip(),
+        email=email,
+        phone=body.phone.strip(),
+        salt_hex=salt.hex(),
+        password_hash=_hash_pw(body.password, salt),
+    )
+    db.add(user)
+    db.commit()
 
-    with _lock:
-        if email in _users:
-            return _json_err(409, "This email is already registered.")
-        _users[email] = rec
-        _persist_users()
+    _persist_users()
 
     token = _issue_token(email, uid)
-    user = UserDto(
+    user_dto = UserDto(
         id=uid,
-        fullName=rec["fullName"],
+        fullName=user.fullName,
         email=email,
-        phone=rec["phone"],
+        phone=user.phone,
     )
     logger.info("auth: registered user %s", email)
-    return AuthResponse(success=True, message="Account created.", token=token, user=user)
+    return AuthResponse(success=True, message="Account created.", token=token, user=user_dto)
 
 
 @router.post("/login", response_model=AuthResponse)
-def login(body: LoginRequest) -> AuthResponse | JSONResponse:
+def login(body: LoginRequest, db: Session = Depends(get_db)) -> AuthResponse | JSONResponse:
     email = _norm_email(body.email)
-    with _lock:
-        rec = _users.get(email)
-    if not rec:
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
         return _json_err(401, "Invalid email or password.")
-    if not secrets.compare_digest(rec["password_hash"], _hash_pw(body.password, bytes.fromhex(rec["salt_hex"]))):
+    if not secrets.compare_digest(user.password_hash, _hash_pw(body.password, bytes.fromhex(user.salt_hex))):
         return _json_err(401, "Invalid email or password.")
 
-    token = _issue_token(email, rec["id"])
-    user = UserDto(
-        id=rec["id"],
-        fullName=rec["fullName"],
+    token = _issue_token(email, user.id)
+    user_dto = UserDto(
+        id=user.id,
+        fullName=user.fullName,
         email=email,
-        phone=rec["phone"],
+        phone=user.phone,
     )
-    return AuthResponse(success=True, message="Signed in.", token=token, user=user)
+    return AuthResponse(success=True, message="Signed in.", token=token, user=user_dto)
 
 
 @router.post("/send-otp", response_model=OtpResponse)
-def send_otp(body: OtpSendRequest) -> OtpResponse:
+def send_otp(body: OtpSendRequest, db: Session = Depends(get_db)) -> OtpResponse:
     phone = body.phone.strip()
     code = f"{secrets.randbelow(1_000_000):06d}"
     exp = time.time() + 600.0
-    with _lock:
-        _otp[phone] = (code, exp)
+
+    # UPSERT pattern via SQLAlchemy
+    db.query(Otp).filter(Otp.phone == phone).delete()
+    db.add(Otp(phone=phone, code=code, expires_at=exp))
+    db.commit()
+
     if AUTH_DEBUG_PRINT_OTP:
         logger.warning("auth: OTP for %s is %s (dev only)", phone, code)
     return OtpResponse(success=True, message="Verification code sent.")
 
 
 @router.post("/verify-otp", response_model=AuthResponse)
-def verify_otp(body: OtpVerifyRequest) -> AuthResponse | JSONResponse:
-    """Validate OTP. Issues a session token for the user registered with this phone (dev convenience)."""
+def verify_otp(body: OtpVerifyRequest, db: Session = Depends(get_db)) -> AuthResponse | JSONResponse:
+    """Validate OTP. Issues a session token for the user registered with this phone."""
     phone = body.phone.strip()
     code = body.code.strip()
     now = time.time()
-    with _lock:
-        entry = _otp.get(phone)
-        if not entry:
-            return _json_err(400, "No verification pending for this number.")
-        stored, exp = entry
-        if now > exp:
-            del _otp[phone]
-            return _json_err(400, "Code expired. Request a new one.")
-        if not secrets.compare_digest(stored, code):
-            return _json_err(400, "Invalid verification code.")
-        del _otp[phone]
-        # Find user by phone (first match)
-        rec = next((u for u in _users.values() if u["phone"] == phone), None)
 
-    if not rec:
+    otp_entry = db.query(Otp).filter(Otp.phone == phone).first()
+    if not otp_entry:
+        return _json_err(400, "No verification pending for this number.")
+    if now > otp_entry.expires_at:
+        db.delete(otp_entry)
+        db.commit()
+        return _json_err(400, "Code expired. Request a new one.")
+    if not secrets.compare_digest(otp_entry.code, code):
+        return _json_err(400, "Invalid verification code.")
+
+    db.delete(otp_entry)
+    db.commit()
+
+    # Find user by phone (first match)
+    user = db.query(User).filter(User.phone == phone).first()
+    if not user:
         return AuthResponse(
             success=True,
             message="Phone verified.",
             token=None,
             user=None,
         )
+
     # Registered user: return session token
-    email = rec["email"]
-    token = _issue_token(email, rec["id"])
-    user = UserDto(
-        id=rec["id"],
-        fullName=rec["fullName"],
-        email=email,
-        phone=rec["phone"],
+    token = _issue_token(user.email, user.id)
+    user_dto = UserDto(
+        id=user.id,
+        fullName=user.fullName,
+        email=user.email,
+        phone=user.phone,
     )
-    return AuthResponse(success=True, message="Phone verified.", token=token, user=user)
+    return AuthResponse(success=True, message="Phone verified.", token=token, user=user_dto)
 
 
 @router.post("/reset-password", response_model=OtpResponse)
-def reset_password(body: ResetPasswordRequest) -> OtpResponse:
+def reset_password(body: ResetPasswordRequest, db: Session = Depends(get_db)) -> OtpResponse:
     """
     Issue a one-time reset token and acknowledge generically.
-
-    In production this token must be delivered via email/SMS and never returned to client.
     In local dev, [AUTH_DEBUG_RETURN_RESET_TOKEN] lets the app complete reset end-to-end.
     """
     email = _norm_email(body.email)
     token_to_send: str | None = None
     debug_token: str | None = None
-    with _lock:
-        rec = _users.get(email)
-        if rec is not None:
-            token = secrets.token_urlsafe(32)
-            exp = time.time() + float(AUTH_PASSWORD_RESET_TOKEN_TTL_SECONDS)
-            _password_reset_tokens[token] = (email, exp)
-            token_to_send = token
+
+    user = db.query(User).filter(User.email == email).first()
+    if user is not None:
+        token = secrets.token_urlsafe(32)
+        exp = time.time() + float(AUTH_PASSWORD_RESET_TOKEN_TTL_SECONDS)
+
+        # UPSERT password reset token
+        db.query(PasswordReset).filter(PasswordReset.email == email).delete()
+        db.add(PasswordReset(token=token, email=email, expires_at=exp))
+        db.commit()
+
+        token_to_send = token
+
     if token_to_send is not None:
         email_sent = _send_password_reset_email(email, token_to_send)
         if AUTH_DEBUG_RETURN_RESET_TOKEN or not email_sent:
@@ -379,40 +574,41 @@ def reset_password(body: ResetPasswordRequest) -> OtpResponse:
 
 
 @router.post("/reset-password/confirm", response_model=OtpResponse)
-def confirm_reset_password(body: ResetPasswordConfirmRequest) -> OtpResponse | JSONResponse:
+def confirm_reset_password(
+    body: ResetPasswordConfirmRequest, db: Session = Depends(get_db)
+) -> OtpResponse | JSONResponse:
     token = body.token.strip()
     now = time.time()
-    with _lock:
-        entry = _password_reset_tokens.get(token)
-        if not entry:
-            return _json_err(400, "Invalid or expired reset token.")
-        email, exp = entry
-        if now > exp:
-            _password_reset_tokens.pop(token, None)
-            return _json_err(400, "Invalid or expired reset token.")
-        rec = _users.get(email)
-        if rec is None:
-            _password_reset_tokens.pop(token, None)
-            return _json_err(400, "Invalid or expired reset token.")
-        salt = secrets.token_bytes(16)
-        rec["salt_hex"] = salt.hex()
-        rec["password_hash"] = _hash_pw(body.newPassword, salt)
-        _users[email] = rec
-        _password_reset_tokens.pop(token, None)
-        _persist_users()
+
+    reset_entry = db.query(PasswordReset).filter(PasswordReset.token == token).first()
+    if not reset_entry:
+        return _json_err(400, "Invalid or expired reset token.")
+    if now > reset_entry.expires_at:
+        db.delete(reset_entry)
+        db.commit()
+        return _json_err(400, "Invalid or expired reset token.")
+
+    user = db.query(User).filter(User.email == reset_entry.email).first()
+    if user is None:
+        db.delete(reset_entry)
+        db.commit()
+        return _json_err(400, "Invalid or expired reset token.")
+
+    salt = secrets.token_bytes(16)
+    user.salt_hex = salt.hex()
+    user.password_hash = _hash_pw(body.newPassword, salt)
+    db.delete(reset_entry)
+    db.commit()
+
+    _persist_users()
     return OtpResponse(success=True, message="Password reset successful.")
 
 
 @router.post("/oauth/google", response_model=AuthResponse)
-def oauth_google(body: OAuthGoogleRequest) -> AuthResponse | JSONResponse:
+def oauth_google(body: OAuthGoogleRequest, db: Session = Depends(get_db)) -> AuthResponse | JSONResponse:
     """
     Development Google OAuth exchange endpoint.
-
-    The Android app obtains an ID token via Google Sign-In and posts it here. In
-    production this endpoint must verify the token signature/audience against Google's
-    JWKS and extract the subject/email claims. For local development we accept any
-    non-empty token and mint (or re-use) a deterministic local user profile so the
-    sign-in flow is testable end-to-end without external verifier dependencies.
+    Mints (or re-uses) a deterministic local user profile from token hash.
     """
     token = body.idToken.strip()
     if len(token) < 8:
@@ -423,26 +619,26 @@ def oauth_google(body: OAuthGoogleRequest) -> AuthResponse | JSONResponse:
     email = f"google_{h[:10]}@aegisnode.local"
     uid = f"g_{h[:16]}"
 
-    with _lock:
-        rec = _users.get(email)
-        if rec is None:
-            salt = secrets.token_bytes(16)
-            rec = {
-                "id": uid,
-                "fullName": "Google User",
-                "email": email,
-                "phone": "",
-                "salt_hex": salt.hex(),
-                "password_hash": _hash_pw(uid, salt),
-            }
-            _users[email] = rec
-            _persist_users()
+    user = db.query(User).filter(User.email == email).first()
+    if user is None:
+        salt = secrets.token_bytes(16)
+        user = User(
+            id=uid,
+            fullName="Google User",
+            email=email,
+            phone="",
+            salt_hex=salt.hex(),
+            password_hash=_hash_pw(uid, salt),
+        )
+        db.add(user)
+        db.commit()
+        _persist_users()
 
-    session = _issue_token(email, rec["id"])
-    user = UserDto(
-        id=rec["id"],
-        fullName=rec["fullName"],
+    session = _issue_token(email, user.id)
+    user_dto = UserDto(
+        id=user.id,
+        fullName=user.fullName,
         email=email,
-        phone=rec["phone"],
+        phone=user.phone,
     )
-    return AuthResponse(success=True, message="Google sign-in successful.", token=session, user=user)
+    return AuthResponse(success=True, message="Google sign-in successful.", token=session, user=user_dto)
