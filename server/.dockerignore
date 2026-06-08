@@ -1,0 +1,30 @@
+# Ignore Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.cache/
+
+# Ignore virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Ignore local database backups and credentials
+auth_users.json
+auth_users.json.tmp
+*.db
+*.sqlite
+
+# Ignore test files (optional, but keeps container clean)
+test_*.py
+
+# Git files
+.git/
+.gitignore
+
+# Docker config files
+Dockerfile
+.dockerignore
