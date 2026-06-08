@@ -454,6 +454,18 @@ async def request_validation_exception_handler(request: Request, exc: RequestVal
     return JSONResponse(status_code=400, content={"detail": "Invalid request payload"})
 
 
+@app.get("/")
+def read_root() -> dict[str, str]:
+    """Default welcome route for the SafeGuard Threat Intelligence backend."""
+    return {
+        "message": "Welcome to SafeGuard Threat Intelligence API",
+        "service": "safeguard-ti-api",
+        "api_version": API_VERSION,
+        "status": "operational",
+        "documentation": "/docs"
+    }
+
+
 @app.get("/health", response_model=HealthResponse)
 def health_json() -> HealthResponse:
     """JSON health for load balancers / k8s probes (prefer this in production)."""
