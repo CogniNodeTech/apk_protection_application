@@ -1,6 +1,6 @@
 -- =============================================================================
--- SafeGuard Consolidated Database Schemas
--- Consolidates Server Backend (MySQL), Client-Side (SQLite), and Migrations (PostgreSQL)
+-- SafeGuard Consolidated Database Schemas (MySQL 8.0+ Compatible)
+-- Consolidates Server Backend, Client-Side, and Migration schemas to run on MySQL
 -- =============================================================================
 
 -- =============================================================================
@@ -38,146 +38,144 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 
 -- =============================================================================
--- SECTION 2: Client-Side Local Database Schema (SQLite / SQLCipher Dialect)
--- Generated from Room Entity models in :data module (com.safeguard.data.local.database.entity)
+-- SECTION 2: Client-Side Local Database Schema (Translated to MySQL Dialect)
+-- Originally generated from Room Entity models in :data module
 -- =============================================================================
 
 -- 1. Quarantine Records Table
 CREATE TABLE IF NOT EXISTS `quarantine` (
-    `id` TEXT NOT NULL,
-    `originalPath` TEXT NOT NULL,
-    `quarantinePath` TEXT NOT NULL,
-    `apkHash` TEXT NOT NULL,
-    `threatName` TEXT,
-    `apkName` TEXT,
+    `id` VARCHAR(255) NOT NULL,
+    `originalPath` VARCHAR(512) NOT NULL,
+    `quarantinePath` VARCHAR(512) NOT NULL,
+    `apkHash` VARCHAR(64) NOT NULL,
+    `threatName` VARCHAR(255),
+    `apkName` VARCHAR(255),
     `riskScore` INTEGER NOT NULL DEFAULT 0,
-    `quarantineTimestamp` INTEGER NOT NULL,
-    `autoDeleteAt` INTEGER NOT NULL,
-    `sizeBytes` INTEGER NOT NULL,
+    `quarantineTimestamp` BIGINT NOT NULL,
+    `autoDeleteAt` BIGINT NOT NULL,
+    `sizeBytes` BIGINT NOT NULL,
     PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 2. Trusted Applications Table
 CREATE TABLE IF NOT EXISTS `trusted_apps` (
-    `id` TEXT NOT NULL,
-    `sha256` TEXT NOT NULL,
-    `packageName` TEXT NOT NULL,
-    `addedAt` INTEGER NOT NULL,
-    `expiresAt` INTEGER NOT NULL,
+    `id` VARCHAR(255) NOT NULL,
+    `sha256` VARCHAR(64) NOT NULL,
+    `packageName` VARCHAR(255) NOT NULL,
+    `addedAt` BIGINT NOT NULL,
+    `expiresAt` BIGINT NOT NULL,
     PRIMARY KEY(`id`)
-);
-CREATE INDEX IF NOT EXISTS `index_trusted_apps_sha256` ON `trusted_apps` (`sha256`);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE INDEX `index_trusted_apps_sha256` ON `trusted_apps` (`sha256`);
 
 -- 3. Scan History Table
 CREATE TABLE IF NOT EXISTS `scan_history` (
-    `id` TEXT NOT NULL,
-    `apkHash` TEXT NOT NULL,
-    `apkName` TEXT NOT NULL,
-    `apkPath` TEXT NOT NULL,
-    `scanTimestamp` INTEGER NOT NULL,
-    `finalVerdict` TEXT NOT NULL,
+    `id` VARCHAR(255) NOT NULL,
+    `apkHash` VARCHAR(64) NOT NULL,
+    `apkName` VARCHAR(255) NOT NULL,
+    `apkPath` VARCHAR(512) NOT NULL,
+    `scanTimestamp` BIGINT NOT NULL,
+    `finalVerdict` VARCHAR(50) NOT NULL,
     `riskScore` INTEGER NOT NULL,
     `layerResultsJson` TEXT NOT NULL,
-    `wasBlocked` INTEGER NOT NULL,
+    `wasBlocked` TINYINT(1) NOT NULL,
     PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 4. Scan Feedback Queue Table (Upload buffer)
 CREATE TABLE IF NOT EXISTS `scan_feedback_queue` (
-    `id` TEXT NOT NULL,
-    `createdAtMs` INTEGER NOT NULL,
-    `sha256` TEXT NOT NULL,
-    `verdict` TEXT NOT NULL,
-    `confidence` REAL NOT NULL,
-    `packageName` TEXT,
+    `id` VARCHAR(255) NOT NULL,
+    `createdAtMs` BIGINT NOT NULL,
+    `sha256` VARCHAR(64) NOT NULL,
+    `verdict` VARCHAR(50) NOT NULL,
+    `confidence` DOUBLE NOT NULL,
+    `packageName` VARCHAR(255),
     `versionCode` INTEGER,
     `layerScoresJson` TEXT NOT NULL,
     `triggeredRulesJson` TEXT NOT NULL,
     `androidApiLevel` INTEGER NOT NULL,
     `appVersionCode` INTEGER NOT NULL,
     PRIMARY KEY(`id`)
-);
-CREATE INDEX IF NOT EXISTS `index_scan_feedback_queue_createdAtMs` ON `scan_feedback_queue` (`createdAtMs`);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE INDEX `index_scan_feedback_queue_createdAtMs` ON `scan_feedback_queue` (`createdAtMs`);
 
 -- 5. Local Malware Signatures Table
 CREATE TABLE IF NOT EXISTS `malware_signatures` (
-    `sha256` TEXT NOT NULL,
-    `sha512` TEXT,
-    `fuzzyHash` TEXT,
-    `threatName` TEXT NOT NULL,
-    `threatFamily` TEXT,
+    `sha256` VARCHAR(64) NOT NULL,
+    `sha512` VARCHAR(128),
+    `fuzzyHash` VARCHAR(100),
+    `threatName` VARCHAR(255) NOT NULL,
+    `threatFamily` VARCHAR(255),
     `severity` INTEGER NOT NULL,
-    `firstSeen` INTEGER,
-    `source` TEXT,
+    `firstSeen` BIGINT,
+    `source` VARCHAR(50),
     PRIMARY KEY(`sha256`)
-);
-CREATE INDEX IF NOT EXISTS `index_malware_signatures_fuzzyHash` ON `malware_signatures` (`fuzzyHash`);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE INDEX `index_malware_signatures_fuzzyHash` ON `malware_signatures` (`fuzzyHash`);
 
 -- 6. User Deleted APKs (Prevent Reinstallation)
 CREATE TABLE IF NOT EXISTS `deleted_apks` (
-    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    `apkName` TEXT NOT NULL,
-    `apkSha256` TEXT,
-    `originalPath` TEXT NOT NULL,
-    `threatName` TEXT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `apkName` VARCHAR(255) NOT NULL,
+    `apkSha256` VARCHAR(64),
+    `originalPath` VARCHAR(512) NOT NULL,
+    `threatName` VARCHAR(255),
     `riskScore` INTEGER NOT NULL,
-    `deletedAt` INTEGER NOT NULL
-);
+    `deletedAt` BIGINT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 7. Append-only Audit Logs
 CREATE TABLE IF NOT EXISTS `audit_log` (
-    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    `timestamp` INTEGER NOT NULL,
-    `scanId` TEXT NOT NULL,
-    `apkName` TEXT NOT NULL,
-    `verdict` TEXT NOT NULL,
-    `action` TEXT NOT NULL,
+    `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `timestamp` BIGINT NOT NULL,
+    `scanId` VARCHAR(255) NOT NULL,
+    `apkName` VARCHAR(255) NOT NULL,
+    `verdict` VARCHAR(50) NOT NULL,
+    `action` VARCHAR(50) NOT NULL,
     `riskScore` INTEGER NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- =============================================================================
--- SECTION 3: Auth PostgreSQL Migrations Database Schema (PostgreSQL 12+)
--- Setup for the auth backend service migrations
+-- SECTION 3: Auth PostgreSQL Migrations Database Schema (Translated to MySQL)
+-- Renamed tables to prevent name conflicts with Section 1
 -- =============================================================================
 
 -- 1. Users Migration Table
-CREATE TABLE IF NOT EXISTS users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+CREATE TABLE IF NOT EXISTS pg_users (
+  id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
   email VARCHAR(255) NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
   full_name VARCHAR(100) NOT NULL,
   phone VARCHAR(20) NOT NULL,
   email_verified BOOLEAN NOT NULL DEFAULT FALSE,
   phone_verified BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE UNIQUE INDEX IF NOT EXISTS users_email_lower_unique ON users (LOWER(email::text));
-CREATE UNIQUE INDEX IF NOT EXISTS users_phone_unique ON users (phone);
-COMMENT ON TABLE users IS 'Registered application users; password_hash is bcrypt.';
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = 'Registered application users; password_hash is bcrypt.';
+CREATE UNIQUE INDEX users_email_lower_unique ON pg_users ((LOWER(email)));
+CREATE UNIQUE INDEX users_phone_unique ON pg_users (phone);
 
 -- 2. OTP Challenges Table
-CREATE TABLE IF NOT EXISTS otp_challenges (
+CREATE TABLE IF NOT EXISTS pg_otp_challenges (
   phone VARCHAR(20) PRIMARY KEY,
   code_hash VARCHAR(64) NOT NULL,
-  expires_at TIMESTAMPTZ NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
   attempts INT NOT NULL DEFAULT 0,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE INDEX IF NOT EXISTS idx_otp_challenges_expires ON otp_challenges (expires_at);
-COMMENT ON TABLE otp_challenges IS 'Phone OTP verification; code stored as SHA-256 with server pepper.';
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = 'Phone OTP verification; code stored as SHA-256 with server pepper.';
+CREATE INDEX idx_otp_challenges_expires ON pg_otp_challenges (expires_at);
 
 -- 3. Password Reset Tokens Table
-CREATE TABLE IF NOT EXISTS password_reset_tokens (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+CREATE TABLE IF NOT EXISTS pg_password_reset_tokens (
+  id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+  user_id VARCHAR(36) NOT NULL,
   token_hash VARCHAR(64) NOT NULL,
-  expires_at TIMESTAMPTZ NOT NULL,
-  used_at TIMESTAMPTZ,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE INDEX IF NOT EXISTS idx_password_reset_user ON password_reset_tokens (user_id);
-CREATE INDEX IF NOT EXISTS idx_password_reset_expires ON password_reset_tokens (expires_at);
-CREATE INDEX IF NOT EXISTS idx_password_reset_hash ON password_reset_tokens (token_hash);
-COMMENT ON TABLE password_reset_tokens IS 'Opaque reset tokens; raw token only sent to user (e.g. email).';
+  expires_at TIMESTAMP NOT NULL,
+  used_at TIMESTAMP NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES pg_users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = 'Opaque reset tokens; raw token only sent to user (e.g. email).';
+CREATE INDEX idx_password_reset_user ON pg_password_reset_tokens (user_id);
+CREATE INDEX idx_password_reset_expires ON pg_password_reset_tokens (expires_at);
+CREATE INDEX idx_password_reset_hash ON pg_password_reset_tokens (token_hash);
